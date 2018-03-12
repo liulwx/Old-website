@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>   
+<html lang="en">   
+<head>   
+    <meta charset="UTF-8">   
+    <title>Login</title> 
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js">
+	</script>  
+    <link rel="stylesheet" type="text/css" href="login.css" charset = "UTF-8"/>   
+</head>   
+<body>   
+    <div id="login">   
+        <h1>Login</h1>           
+		<input type="text" required="required" placeholder="用户名" id = "username" name="username"></input>   
+		<input type="password" required="required" placeholder="密码" id = "password" name="password"></input>   
+		<button class="but" type="button">登录</button> 
+		<button class = "reges" type = "button"">注册</button>
+		<button class = "forgetpwd" type = "button">忘记密码</button>
+		<span class = "con"></span>     
+<script>
+$(document).ready
+(function()
+{
+	$(".but").click(function()
+	{
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var status = "NULL";
+		alert(password),
+		$.ajax({
+			url : "login.php",
+			type : "POST",
+			data:{name: username, pwd: password, sta: status},
+			dataType : "json",
+			error: function(){
+				$('.con').html('Error loading XML document');
+			},
+			success: function(data){
+				alert(data),
+				$('.con').html("用户名:" + data[0] + "密码："+ data[1] + "登陆状态" + data[2]);
+				if ("Permitted" == data[2])
+				{
+					window.location.href = "Query.html";
+				}
+			}
+		});
+	})
+})
+</script>
+</div>  
+</body>   
+</html> 

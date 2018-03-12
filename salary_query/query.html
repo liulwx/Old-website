@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+	<title>欢迎进入丰县创新外国语学校工资查询系统</title>
+	<meta charset = "UTF-8">
+	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+<select class = "J_Month" placeholder = "1"  name ="月份" id = "J_Month">
+	<option value = "1">1月</option>
+	<option value = "2">2月</option>
+	<option value = "3">3月</option>
+	<option value = "4">4月</option>
+	<option value = "5">5月</option>
+	<option value = "6">6月</option>
+	<option value = "7">7月</option>
+	<option value = "8">8月</option>
+	<option value = "9">9月</option>
+	<option value = "10">10月</option>
+	<option value = "11">11月</option>
+	<option value = "12">12月</option>
+</select>
+<button type = "submit" name = "提交" class = "query">查询</button><br>
+<p class = "test">本来是的好的</p><br>
+<table class = "querytable" border = "1" cellpadding = "10">
+<tr class = "resultHead"></tr>
+<tr class = "resultValue"></tr>
+</table>
+
+
+
+<span class = "con"></span>
+<script>
+$(".query").click(function(){
+	
+	var month = $("#J_Month").val();
+	$.post('query.php',{mon:month},function(data){
+		alert(data);
+		var json = eval('(' + data + ')');
+		//$('.con').html(json.姓名);
+		var th = "";
+		var td = "";
+		for(x in json){
+			th = "<th>" + x + "</th>";
+			$(th).appendTo('.resultHead');
+			td = "<td>" + json[x] + "</td>";
+			$(td).appendTo('.resultValue');
+		}
+		
+	})
+})
+</script>
+
+
+
+</form>
